@@ -1,4 +1,6 @@
-type Props = {};
+type Props = {
+  numberOfGuesses: number;
+};
 
 const HEAD = (
   <div
@@ -82,15 +84,12 @@ const LEFT_LEG = (
   />
 );
 
-const index = (props: Props) => {
+const BODY_PARTS = [HEAD, BODY, RIGHT_ARM, LEFT_ARM, LEFT_LEG, RIGHT_LEG];
+
+const index = ({ numberOfGuesses }: Props) => {
   return (
     <div style={{ position: "relative" }}>
-      {HEAD}
-      {BODY}
-      {RIGHT_ARM}
-      {LEFT_ARM}
-      {LEFT_LEG}
-      {RIGHT_LEG}
+      {BODY_PARTS.slice(0, numberOfGuesses)}
       <div
         style={{
           height: "50px",

@@ -1,10 +1,11 @@
 import React from "react";
 
-type Props = {};
+type Props = {
+  wordToGuess: string;
+  guessedLetters: string[];
+};
 
-const index = (props: Props) => {
-  const word = "text";
-  const guessedLetter = ["t"];
+const index = ({ wordToGuess, guessedLetters }: Props) => {
   return (
     <div
       style={{
@@ -16,11 +17,13 @@ const index = (props: Props) => {
         fontFamily: "monospace",
       }}
     >
-      {word.split("").map((letter, index) => (
+      {wordToGuess.split("").map((letter, index) => (
         <span key={index} style={{ borderBottom: ".1em solid black" }}>
           <span
             style={{
-              visibility: guessedLetter.includes(letter) ? "visible" : "hidden",
+              visibility: guessedLetters.includes(letter)
+                ? "visible"
+                : "hidden",
             }}
           >
             {letter}
