@@ -1,11 +1,12 @@
 import React from "react";
 
 type Props = {
+  reveal?: boolean;
   wordToGuess: string;
   guessedLetters: string[];
 };
 
-const index = ({ wordToGuess, guessedLetters }: Props) => {
+const index = ({ reveal = false, wordToGuess, guessedLetters }: Props) => {
   return (
     <div
       style={{
@@ -21,9 +22,12 @@ const index = ({ wordToGuess, guessedLetters }: Props) => {
         <span key={index} style={{ borderBottom: ".1em solid black" }}>
           <span
             style={{
-              visibility: guessedLetters.includes(letter)
-                ? "visible"
-                : "hidden",
+              visibility:
+                guessedLetters.includes(letter) || reveal
+                  ? "visible"
+                  : "hidden",
+              color:
+                !guessedLetters.includes(letter) && reveal ? "red" : "black",
             }}
           >
             {letter}

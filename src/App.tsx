@@ -7,15 +7,19 @@ import KeyBoard from "./scenes/keyBoard/index";
 type Props = {};
 
 const App = (props: Props) => {
-  const [wordToGuess, setWordToGuess] = useState(() => {
-    return words[Math.floor(Math.random() * words.length)];
-  });
+  const [wordToGuess, setWordToGuess] = useState(getWord);
 
   const [guessedLetters, setGuessedLetters] = useState<string[]>([]);
   const incorrectLetters = guessedLetters.filter(
     (el) => !wordToGuess.includes(el)
   );
-  console.log(wordToGuess);
+
+  const isLoser = incorrectLetters.length >= 6;
+  // cause there are only 6 body parts
+
+  const isWinner = wordToGuess
+    .split("")
+    .every((el) => guessedLetters.includes(el));
 
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
@@ -35,18 +39,38 @@ const App = (props: Props) => {
     };
   }, [guessedLetters]);
 
-  const addGuessedLetter = useCallback(
-    (letter: string) => {
-      if (guessedLetters.includes(letter)) return;
-      setGuessedLetters((currentLetters) => [...currentLetters, letter]);
-    },
-    [guessedLetters]
-  );
+  // const addGuessedLetter = useCallback(
+  //   (letter: string) => {
+  //     if (guessedLetters.includes(letter)) return;
+  //     setGuessedLetters((currentLetters) => [...currentLetters, letter]);
+  //   },
+  //   [guessedLetters]
+  // );
 
-  // const addGuessedLetter = (letter: string) => {
-  //   if (guessedLetters.includes(letter)) return;
-  //   setGuessedLetters((currentLetters) => [...currentLetters, letter]);
-  // };
+  const addGuessedLetter = (letter: string) => {
+    if (guessedLetters.includes(letter) || isLoser || isWinner) return;
+    setGuessedLetters((currentLetters) => [...currentLetters, letter]);
+  };
+
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      const key = e.key;
+      if (key !== "Enter") return;
+      e.preventDefault();
+      setGuessedLetters([]);
+      setWordToGuess(getWord());
+    };
+
+    document.addEventListener("keypress", handler);
+
+    return () => {
+      document.removeEventListener("keypress", handler);
+    };
+  }, [guessedLetters]);
+
+  function getWord() {
+    return words[Math.floor(Math.random() * words.length)];
+  }
 
   return (
     <div
@@ -59,11 +83,19 @@ const App = (props: Props) => {
         alignItems: "center",
       }}
     >
-      <div style={{ fontSize: "2rem", textAlign: "center" }}>Lose Win</div>
+      <div style={{ fontSize: "2rem", textAlign: "center" }}>
+        {isWinner && "You Gussed it right- Refresh to start again"}
+        {isLoser && "Upppps, Its wrong- Refresh to start again"}
+      </div>
       <HangmanDrawing numberOfGuesses={incorrectLetters.length} />
-      <HangmanWord wordToGuess={wordToGuess} guessedLetters={guessedLetters} />
+      <HangmanWord
+        reveal={isLoser}
+        wordToGuess={wordToGuess}
+        guessedLetters={guessedLetters}
+      />
       <div style={{ alignSelf: "stretch" }}>
         <KeyBoard
+          disabled={isWinner || isLoser}
           activeLetter={guessedLetters.filter((el) => wordToGuess.includes(el))}
           inactiveLetters={incorrectLetters}
           addGuessedLetter={addGuessedLetter}

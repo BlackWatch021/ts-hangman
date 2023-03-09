@@ -4,6 +4,7 @@ type Props = {
   activeLetter: string[];
   inactiveLetters: string[];
   addGuessedLetter: (letter: string) => void;
+  disabled?: boolean;
 };
 
 const KEYS = [
@@ -35,7 +36,12 @@ const KEYS = [
   "z",
 ];
 
-const index = ({ activeLetter, inactiveLetters, addGuessedLetter }: Props) => {
+const index = ({
+  disabled = false,
+  activeLetter,
+  inactiveLetters,
+  addGuessedLetter,
+}: Props) => {
   return (
     <div
       style={{
@@ -49,6 +55,7 @@ const index = ({ activeLetter, inactiveLetters, addGuessedLetter }: Props) => {
         const isInactive = inactiveLetters.includes(letter);
         return (
           <button
+            disabled={isActive || isInactive || disabled}
             onClick={() => addGuessedLetter(letter)}
             className={`btn  ${isActive ? "active" : ""} ${
               isInactive ? "inactive" : ""
