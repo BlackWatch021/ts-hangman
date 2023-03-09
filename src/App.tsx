@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import words from "./wordList.json";
-import HangmanDrawing from "./scenes/hangmanDrawing";
-import HangmanWord from "./scenes/hangmanWord";
-import KeyBoard from "./scenes/keyBoard";
+import HangmanDrawing from "./scenes/hangmanDrawing/index";
+import HangmanWord from "./scenes/hangmanWord/index";
+import KeyBoard from "./scenes/keyBoard/index";
 
 type Props = {};
 
@@ -28,8 +28,8 @@ const App = (props: Props) => {
     >
       <div style={{ fontSize: "2rem", textAlign: "center" }}>Lose Win</div>
       <HangmanDrawing />
-      <HangmanWord />
-      <KeyBoard />
+      {/* <HangmanWord /> */}
+      {/* <KeyBoard /> */}
     </div>
   );
 };
