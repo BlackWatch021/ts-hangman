@@ -1,6 +1,10 @@
 import "./style.css";
 
-type Props = {};
+type Props = {
+  activeLetter: string[];
+  inactiveLetters: string[];
+  addGuessedLetter: (letter: string) => void;
+};
 
 const KEYS = [
   "a",
@@ -31,7 +35,7 @@ const KEYS = [
   "z",
 ];
 
-const index = (props: Props) => {
+const index = ({ activeLetter, inactiveLetters, addGuessedLetter }: Props) => {
   return (
     <div
       style={{
@@ -40,11 +44,21 @@ const index = (props: Props) => {
         gap: ".5rem",
       }}
     >
-      {KEYS.map((letter, index) => (
-        <button className={"btn "} key={index}>
-          {letter}
-        </button>
-      ))}
+      {KEYS.map((letter, index) => {
+        const isActive = activeLetter.includes(letter);
+        const isInactive = inactiveLetters.includes(letter);
+        return (
+          <button
+            onClick={() => addGuessedLetter(letter)}
+            className={`btn  ${isActive ? "active" : ""} ${
+              isInactive ? "inactive" : ""
+            }`}
+            key={index}
+          >
+            {letter}
+          </button>
+        );
+      })}
     </div>
   );
 };
