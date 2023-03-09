@@ -28,8 +28,8 @@ const App = (props: Props) => {
     >
       <div style={{ fontSize: "2rem", textAlign: "center" }}>Lose Win</div>
       <HangmanDrawing />
-      {/* <HangmanWord /> */}
-      {/* <KeyBoard /> */}
+      <HangmanWord />
+      <KeyBoard />
     </div>
   );
 };
