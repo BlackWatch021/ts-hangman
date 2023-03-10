@@ -18,7 +18,7 @@ const index = ({ reveal = false, wordToGuess, guessedLetters }: Props) => {
       }}
     >
       {wordToGuess.split("").map((letter, index) => (
-        <span key={index} style={{ borderBottom: "5px solid black" }}>
+        <span key={index} style={{ borderBottom: "3px solid black" }}>
           <span
             style={{
               visibility:
