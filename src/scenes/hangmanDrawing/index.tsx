@@ -21,7 +21,7 @@ const BODY = (
       width: "5px",
       height: "100px ",
       position: "absolute",
-      top: "88px ",
+      top: "87px ",
       right: "0px",
       background: "black",
     }}
@@ -63,7 +63,7 @@ const RIGHT_LEG = (
       background: "black",
       position: "absolute",
       top: "180px ",
-      right: "-84px",
+      right: "-83px",
       rotate: "60deg",
       transformOrigin: "left bottom",
     }}

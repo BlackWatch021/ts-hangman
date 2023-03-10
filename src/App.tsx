@@ -75,24 +75,26 @@ const App = (props: Props) => {
   return (
     <div
       style={{
-        maxWidth: "1200px",
+        maxWidth: "900px",
         display: "flex",
         flexDirection: "column",
         gap: "2rem",
         margin: "0 auto",
         alignItems: "center",
-        background: "pink",
       }}
     >
       <div
         style={{
-          fontSize: "16pt",
+          fontSize: "14pt",
           fontFamily: "sans-serif",
           textAlign: "center",
+          marginTop: "10px",
         }}
       >
-        {isWinner && "You Gussed it right- Refresh to start again"}
-        {isLoser && "Upppps, Its wrong- Refresh to start again"}
+        {isWinner &&
+          "You Gussed it right- Refresh to start again (Press 'ENTER' to Start Again)"}
+        {isLoser &&
+          "Upppps, Its wrong- Refresh to start again (Press 'ENTER' to Start Again)"}
       </div>
       <HangmanDrawing numberOfGuesses={incorrectLetters.length} />
       <HangmanWord
