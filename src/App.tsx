@@ -75,15 +75,22 @@ const App = (props: Props) => {
   return (
     <div
       style={{
-        maxWidth: "800px",
+        maxWidth: "1200px",
         display: "flex",
         flexDirection: "column",
         gap: "2rem",
         margin: "0 auto",
         alignItems: "center",
+        background: "pink",
       }}
     >
-      <div style={{ fontSize: "2rem", textAlign: "center" }}>
+      <div
+        style={{
+          fontSize: "16pt",
+          fontFamily: "sans-serif",
+          textAlign: "center",
+        }}
+      >
         {isWinner && "You Gussed it right- Refresh to start again"}
         {isLoser && "Upppps, Its wrong- Refresh to start again"}
       </div>
