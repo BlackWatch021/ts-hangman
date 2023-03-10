@@ -10,16 +10,15 @@ const index = ({ reveal = false, wordToGuess, guessedLetters }: Props) => {
   return (
     <div
       style={{
-        display: "flex     ",
-        gap: ".25rem",
-        fontSize: "6rem",
-        fontWeight: "bold",
+        display: "flex",
+        gap: ".5rem",
+        fontSize: "38pt",
         textTransform: "uppercase",
         fontFamily: "monospace",
       }}
     >
       {wordToGuess.split("").map((letter, index) => (
-        <span key={index} style={{ borderBottom: ".1em solid black" }}>
+        <span key={index} style={{ borderBottom: "5px solid black" }}>
           <span
             style={{
               visibility:
@@ -28,6 +27,10 @@ const index = ({ reveal = false, wordToGuess, guessedLetters }: Props) => {
                   : "hidden",
               color:
                 !guessedLetters.includes(letter) && reveal ? "red" : "black",
+              fontStyle:
+                !guessedLetters.includes(letter) && reveal ? "italic" : "",
+              fontWeight:
+                !guessedLetters.includes(letter) && reveal ? "bold" : "",
             }}
           >
             {letter}
